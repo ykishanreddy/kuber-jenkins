@@ -1,6 +1,7 @@
 pipeline {
-  
-    environment {
+
+  environment {
+    registry = "https://registry.hub.docker.com"
     dockerImage = ""
   }
 
@@ -10,23 +11,24 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/ykishanreddy/kuber-jenkins.git'
+        git 'https://github.com/justmeandopensource/playjenkins.git'
       }
     }
 
     stage('Build image') {
       steps{
-       // script {
-          dockerImage = docker.build("ykreddys/reddy") 
-      //  }
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
       }
     }
 
     stage('Push Image') {
       steps{
-          //docker.withRegistry('https://registry.hub.docker.com', 'docker') {
-            withDockerRegistry(credentialsId: 'docker', url: 'https://registry.hub.docker.com') {
+        script {
+          docker.withRegistry( "" ) {
             dockerImage.push()
+          }
         }
       }
     }
