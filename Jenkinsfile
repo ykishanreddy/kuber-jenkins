@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    registry = "https://registry.hub.docker.com"
+    registry = "ykreddys/reddy"
     dockerImage = ""
   }
 
@@ -26,7 +26,7 @@ pipeline {
     stage('Push Image') {
       steps{
         script {
-          docker.withRegistry( "" ) {
+          docker.withRegistry('https://registry.hub.docker.com', 'docker') {
             dockerImage.push()
           }
         }
