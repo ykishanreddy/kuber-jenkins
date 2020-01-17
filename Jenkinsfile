@@ -26,7 +26,6 @@ pipeline {
     stage('Push Image') {
       steps{
         sh "chmod 777 /var/lib/jenkins/workspace/kubernet_pipeline/myweb.yaml"
-        sh "chown root:root /var/lib/jenkins/workspace/kubernet_pipeline/myweb.yaml"
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker') {
             dockerImage.push()
@@ -38,7 +37,7 @@ pipeline {
     stage('Deploy App') {
       steps {
         script {
-          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
+          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubernat")
         }
       }
     }
