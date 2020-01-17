@@ -37,12 +37,12 @@ pipeline {
  stage('Deploy to k8s'){
     steps{
          sshagent(['kunedock']){
-             sh "scp -o StrictHostKeyChecking=no myweb.yaml centos@18.221.106.235:/home/centos/"
+             sh "scp -o StrictHostKeyChecking=no myweb.yaml root@18.221.106.235:/root/"
              script{
                  try{
-                     sh "ssh centos@18.221.106.235 kubectl apply -f ."
+                     sh "ssh root@18.221.106.235 kubectl apply -f ."
                  }catch(error){
-                     sh "ssh centos@18.221.106.235 kubectl create -f ."
+                     sh "ssh root@18.221.106.235 kubectl create -f ."
                   }
                 }
               }
