@@ -16,9 +16,9 @@ pipeline {
 
     stage('Build image') {
       steps{
-        script {
+       // script {
           dockerImage = docker.build("ykreddys/reddy") 
-        }
+      //  }
       }
     }
 
