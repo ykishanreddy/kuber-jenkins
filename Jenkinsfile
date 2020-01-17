@@ -36,7 +36,7 @@ pipeline {
 
  stage('Deploy to k8s'){
     steps{
-         sshagent(['mycredint']){
+         sshagent(['kunedock']){
              sh "scp -o StrictHostKeyChecking=no myweb.yaml centos@18.221.106.235:/home/centos/"
              script{
                  try{
