@@ -25,6 +25,7 @@ pipeline {
 
     stage('Push Image') {
       steps{
+        sh "chmod 777 /var/lib/jenkins/workspace/kubernet_pipeline/myweb.yaml
         script {
           docker.withRegistry('https://registry.hub.docker.com', 'docker') {
             dockerImage.push()
