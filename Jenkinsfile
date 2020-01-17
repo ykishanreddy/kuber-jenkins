@@ -1,9 +1,9 @@
 pipeline {
 
-  environment {
-    registry = "192.168.1.81:5000/justme/myweb"
-    dockerImage = ""
-  }
+ # environment {
+ #   registry = "192.168.1.81:5000/justme/myweb"
+ #   dockerImage = ""
+ # }
 
   agent any
 
@@ -11,14 +11,14 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git 'https://github.com/justmeandopensource/playjenkins.git'
+        git 'https://github.com/ykishanreddy/kuber-jenkins.git'
       }
     }
 
     stage('Build image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build("ykreddys/reddy") + ":$BUILD_NUMBER"
         }
       }
     }
@@ -26,7 +26,7 @@ pipeline {
     stage('Push Image') {
       steps{
         script {
-          docker.withRegistry( "" ) {
+          docker.withRegistry('https://registry.hub.docker.com', 'docker') {
             dockerImage.push()
           }
         }
