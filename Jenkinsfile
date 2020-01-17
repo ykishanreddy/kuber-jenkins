@@ -1,7 +1,7 @@
 pipeline {
 
   environment {
-    registry = "ykreddys/reddy"
+    registry = "ykreddys/kuber"
     dockerImage = ""
   }
 
