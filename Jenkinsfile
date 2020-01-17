@@ -34,13 +34,20 @@ pipeline {
       }
     }
 
-    stage('Deploy App') {
-      steps {
-        script {
-          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubernat")
-        }
-      }
-    }
+ stage('Deploy to k8s'){
+    steps{
+         sshagent(['mycredint']){
+             sh "scp -o StrictHostKeyChecking=no myweb.yaml centos@18.221.106.235:/home/centos/"
+             script{
+                 try{
+                     sh "ssh centos@18.221.106.235 kubectl apply -f ."
+                 }catch(error){
+                     sh "ssh centos@18.221.106.235 kubectl create -f ."
+                  }
+                }
+              }
+           }
+          }  
 
   }
 
