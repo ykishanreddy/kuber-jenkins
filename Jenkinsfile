@@ -34,20 +34,11 @@ pipeline {
       }
     }
 
- stage('Deploy to k8s'){
-    steps{
-         sshagent(['kunedock']){
-             sh "scp -o StrictHostKeyChecking=no myweb.yaml root@18.221.106.235:/root/"
-             script{
-                 try{
-                     sh "ssh root@18.221.106.235 kubectl apply -f ."
-                 }catch(error){
-                     sh "ssh root@18.221.106.235 kubectl create -f ."
-                  }
-                }
-              }
-           }
-          }  
+ stage('Deploy App') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
+        }  
 
   }
 
