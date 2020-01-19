@@ -36,13 +36,21 @@ pipeline {
 
  stage('Deploy App') {
       steps {
-          withKubeConfig([credentialsId: 'mykubeconfig']) {
-          sh 'kubectl get pods'
         script {
-          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
+          kubernetesDeploy(kubeconfigId: 'mykubeconfig',               // REQUIRED
+
+                 configs: 'myweb.yaml', // REQUIRED
+                 enableConfigSubstitution: false,
+        
+                 dockerCredentials: [
+                        [credentialsId: 'https://registry.hub.docker.com'],
+                    
+                 ]
+)
+      //    kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
         }  
           }
-  }
+  
 
   }
  }
