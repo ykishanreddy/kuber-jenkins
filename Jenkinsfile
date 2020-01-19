@@ -37,13 +37,16 @@ pipeline {
  stage('Deploy App') {
       steps {
         script {
-                                kubernetesDeploy(
-                                credentialsType: 'KubeConfig',
-                                kubeConfig: [path: '/var/lib/jenkins/workspace/kubernet_pipeline/kubeconfig'],
-                                configs: 'myweb.yaml', 
-                                dockerCredentials: [
-                                      [credentialsId: 'docker'],
-                                ],
+          
+          kubernetesDeploy configs: 'myweb.yaml', dockerCredentials: [[credentialsId: 'docker', url: 'https://registry.hub.docker.com']], kubeConfig: [path: '/var/lib/jenkins/workspace/kubernet_pipeline/kubeconfig'], kubeconfigId: 'mykubeconfig', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']
+          
+                    //            kubernetesDeploy(
+                      //          credentialsType: 'KubeConfig',
+                        //        kubeConfig: [path: '/var/lib/jenkins/workspace/kubernet_pipeline/kubeconfig'],
+                          //      configs: 'myweb.yaml', 
+                            //    dockerCredentials: [
+                              //        [credentialsId: 'docker'],
+                                //],
       //    kubernetesDeploy(kubeconfigId: 'mykubeconfig',               // REQUIRED
 
         //         configs: 'myweb.yaml', // REQUIRED
@@ -54,7 +57,7 @@ pipeline {
                 // dockerCredentials: [
                   //     [credentialsId: 'docker'],
                     // ]
-)
+//)
       //    kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
         }  
           }
