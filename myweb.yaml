@@ -1,20 +1,18 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: helloworld-deployment
+  name: sample-k8s-deployment
 spec:
-  replicas: 3
-  selector:
-    matchLabels:
-      app: helloworld
+  replicas: 1
   template:
     metadata:
       labels:
-        app: helloworld
+        app: sample-k8s-app
     spec:
       containers:
-      - name: k8s-demo
-        image: wardviaene/k8s-demo
+      - name: sample-k8s-app-container
+        image: dhananjeyal/dhana
         ports:
-        - name: nodejs-port
-          containerPort: 3000
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: $KUBERNETES_SECRET_NAME
