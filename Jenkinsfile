@@ -44,8 +44,7 @@ pipeline {
         
                 // dockerCredentials: [
                   //      [credentialsId: 'docker', url: 'https://registry.hub.docker.com'],
-                    
-                 ]
+                    //  ]
 )
       //    kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
         }  
