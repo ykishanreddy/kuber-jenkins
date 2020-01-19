@@ -42,9 +42,11 @@ pipeline {
                  configs: 'myweb.yaml', // REQUIRED
                  enableConfigSubstitution: false,
         
-                // dockerCredentials: [
-                  //      [credentialsId: 'docker', url: 'https://registry.hub.docker.com'],
-                    //  ]
+                 secretNamespace: 'default',
+                 secretName: '',
+                 dockerCredentials: [
+                       [credentialsId: 'docker'],
+                     ]
 )
       //    kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
         }  
