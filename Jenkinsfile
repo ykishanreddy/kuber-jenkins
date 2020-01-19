@@ -42,8 +42,8 @@ pipeline {
                  configs: 'myweb.yaml', // REQUIRED
                  enableConfigSubstitution: false,
         
-                 dockerCredentials: [
-                        [credentialsId: 'docker', url: 'https://registry.hub.docker.com'],
+                // dockerCredentials: [
+                  //      [credentialsId: 'docker', url: 'https://registry.hub.docker.com'],
                     
                  ]
 )
