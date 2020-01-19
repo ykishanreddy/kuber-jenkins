@@ -36,10 +36,12 @@ pipeline {
 
  stage('Deploy App') {
       steps {
+          withKubeConfig([credentialsId: 'mykubeconfig']) {
+          sh 'kubectl get pods'
         script {
           kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
         }  
-
+          }
   }
 
   }
