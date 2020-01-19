@@ -43,7 +43,7 @@ pipeline {
                  enableConfigSubstitution: false,
         
                  dockerCredentials: [
-                        [credentialsId: 'https://registry.hub.docker.com', 'docker'],
+                        [credentialsId: 'docker', url: 'https://registry.hub.docker.com'],
                     
                  ]
 )
